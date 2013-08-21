@@ -1,0 +1,260 @@
+/**
+ * Vendor Imports
+ */
+
+@import "../vendor/bootstrap/less/mixins.less";
+@import "../vendor/bootstrap/less/utilities.less";
+@import "../vendor/bootstrap/less/normalize.less";
+@import "../vendor/bootstrap/less/type.less";
+@import "../vendor/bootstrap/less/print.less";
+@import "../vendor/bootstrap/less/forms.less";
+@import "../vendor/bootstrap/less/scaffolding.less";
+@import "../vendor/bootstrap/less/grid.less";
+@import "../vendor/bootstrap/less/navs.less";
+@import "../vendor/bootstrap/less/navbar.less";
+@import "../vendor/bootstrap/less/buttons.less";
+@import "../vendor/bootstrap/less/thumbnails.less";
+
+
+/**
+ * Import Variables.
+ */
+
+@import "variables.less";
+
+
+/**
+ * Typography
+ */
+
+a {
+  .transition( 300ms );
+  text-decoration: none;
+
+  &:active, &:hover {
+    text-decoration: none;
+  }
+}
+
+
+/**
+ * Navbar
+ */
+
+.navbar {
+  /*position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;*/
+  height: @navbar-height;
+  z-index: 1030;
+  border-radius: 0;
+  margin-bottom: 0;
+
+  .navbar-brand {
+    max-width: 400px;
+  }
+}
+
+
+/**
+ * Jumbotron.
+ */
+
+body, html {
+  min-height: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.jumbotron {
+  display: table;
+  min-height: 100%;
+  min-width: 100%;
+  padding-top: @navbar-height * 2;
+  background: url(./background.jpg) no-repeat top center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  .marketing-text {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #FFF;
+    font-family: @jumbotron-font;
+    font-size: 60px;
+    line-height: 80px;
+    letter-spacing: 5px;
+  }
+}
+
+
+/**
+ * Order form
+ */
+
+.order-form-wrapper {
+  margin: 30px 10px;
+
+  .order-form {
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #777;
+    color: #000;
+    
+    .col-12 {
+      margin-bottom: 10px;
+    }
+
+    .form-control {
+      height: 56px;
+      padding: 14px 16px;
+      font-size: 18px;
+      border-radius: 6px;
+    }
+
+    label {
+      margin-bottom: 0;
+      line-height: 30px;
+    }
+
+    .btn {
+      margin-top: 10px;
+      padding: 14px 16px;
+      font-size: 18px;
+      border-radius: 6px;
+    }
+
+    legend {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+
+/**
+ * Media
+ */
+
+.media {
+  margin: 60px 0;
+  text-align: center;
+
+  .thumbnail {
+    display: inline-block;
+    border-color: @text-color;
+
+    &:hover {
+      border-color: @brand-danger;
+    }
+  }
+}
+
+
+/**
+ * Footer
+ */
+
+.footer {
+  background-color: @navbar-inverse-bg;
+  padding: 60px 0;
+
+  .tickets li {
+    margin: 10px 0;
+  }
+
+  .marketing-copy {
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 36px;
+  }
+
+  .social {
+    .list-inline {
+      display: inline-block;
+      font-size: 36px;
+      line-height: 1;
+
+      li {
+        margin: 5px;
+      }
+    }
+  }
+
+  .row {
+    text-align: center;
+
+    &>* {
+      margin-bottom: 30px;
+    }
+  }
+}
+
+
+/**
+ * Responsive Styles.
+ */
+
+@import "../vendor/bootstrap/less/responsive-utilities.less";
+
+/**
+ * Tablets and Higher
+ */
+@media (min-width: @screen-tablet-max) {
+  .navbar {
+    opacity: .9;
+  }
+
+  .jumbotron {
+    .marketing-text {
+      font-size: 100px;
+      line-height: 120px;
+    }
+  }
+
+  .order-form-wrapper {
+    position: fixed;
+    top: @navbar-height;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    margin: 0;
+      background-color: #777;
+      opacity: .8;
+
+    .order-form {
+      .col-12 {
+        margin-bottom: 0;
+      }
+
+      .form-control {
+        height: 30px;
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 30px;
+        border-radius: 3px;
+      }
+
+      .btn {
+        margin-top: 0;
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+      }
+    }
+  }
+}
+
+@media (min-width: @screen-tablet) {
+  .footer {
+    .row {
+      &>* {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+

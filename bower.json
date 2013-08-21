@@ -1,0 +1,7 @@
+{
+  "name": "dreamsofdarkness.com",
+  "version": "0.0.1",
+  "devDependencies": {
+    "bootstrap": "~3.0"
+  }
+}
