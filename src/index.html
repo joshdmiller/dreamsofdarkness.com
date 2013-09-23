@@ -18,20 +18,6 @@
           $(".letter-container > span").lettering();
       });
     </script>
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
-      _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
-      _gaq.push(['_setAccount', 'UA-44241540-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
   </head>
   <body>
     <div class="navbar-wrapper">
@@ -39,9 +25,9 @@
         <div class="container">
           <a href="#" class="navbar-brand">Dreams Of Darkness <span class="hh-text">Haunted House</span></a>
           <ul class="nav navbar-nav pull-right visible-md visible-lg">
-            <li><a href="mailto:info@dreamsofdarkness.com"><i class="icon-envelope"></i></a></li>
-            <li><a href="http://www.facebook.com/thedreamsofdarkness"><i class="icon-facebook"></i></a></li>
-            <li><a href="http://twitter.com/reddinghaunt"><i class="icon-twitter"></i></a></li>
+            <li><a href="mailto:info@dreamsofdarkness.com" onClick="trackOutboundLink(this, 'Social Link', 'email'); return false;"><i class="icon-envelope"></i></a></li>
+            <li><a href="http://www.facebook.com/thedreamsofdarkness" onClick="trackOutboundLink(this, 'Social Link', 'facebook'); return false;"><i class="icon-facebook"></i></a></li>
+            <li><a href="http://twitter.com/reddinghaunt" onClick="trackOutboundLink(this, 'Social Link', 'twitter'); return false;"><i class="icon-twitter"></i></a></li>
           </ul>
         </div>
       </div>
@@ -110,7 +96,9 @@
       <div class="container">
         <div class="row">
           <div class="col-12 col-lg-12">
-            <a class="thumbnail" target="_blank" href="http://www.youtube.com/watch?v=Qxoh1jSxFFI">
+            <a class="thumbnail" target="_blank" 
+              href="http://www.youtube.com/watch?v=Qxoh1jSxFFI"
+              onClick="trackOutboundLink(this, 'Outbound Link', 'youtube-trailer'); return false;">
               <img src="http://img.youtube.com/vi/Qxoh1jSxFFI/mqdefault.jpg" alt="Watch the Trailer" />
             </a>
             <h3>Watch the Trailer</h3>
@@ -128,21 +116,22 @@
           <div class="col-12 col-sm-4 col-lg-4">
             <h3><i class="icon-map-marker"></i>&nbsp;&nbsp;Location</h3>
             <address>
-              Located at <a href="http://nashranch.com">Nash Ranch</a><br />
+              Located at <a href="http://nashranch.com" onClick="trackOutboundLink(this, 'Outbound Link', 'nashranch.com'); return false;">Nash Ranch</a><br />
               10925 Old Oregon Trail<br />
               Redding, CA 96003<br /><br />
               <a href="https://maps.google.com/maps/?q=10925+Old+Oregon+Trail%2C+Redding%2C+CA+96003"
                 class="btn btn-danger"
-                target="_new">Directions</a>
+                target="_new"
+                onClick="trackOutboundLink(this, 'Outbound Link', 'directions'); return false;">Directions</a>
             </address>
           </div>
           <div class="col-12 col-sm-4 col-lg-4">
             <h3><i class="icon-comment"></i>&nbsp;&nbsp;Get in Touch</h3>
             <div class="social">
               <ul class="list-inline">
-                <li><a href="mailto:info@dreamsofdarkness.com"><i class="icon-envelope"></i></a></li>
-                <li><a href="http://www.facebook.com/thedreamsofdarkness"><i class="icon-facebook"></i></a></li>
-                <li><a href="http://twitter.com/reddinghaunt"><i class="icon-twitter"></i></a></li>
+                <li><a href="mailto:info@dreamsofdarkness.com" onClick="trackOutboundLink(this, 'Social Link', 'email'); return false;"><i class="icon-envelope"></i></a></li>
+                <li><a href="http://www.facebook.com/thedreamsofdarkness" onClick="trackOutboundLink(this, 'Social Link', 'facebook'); return false;"><i class="icon-facebook"></i></a></li>
+                <li><a href="http://twitter.com/reddinghaunt" onClick="trackOutboundLink(this, 'Social Link', 'twitter'); return false;"><i class="icon-twitter"></i></a></li>
               </ul>
             </div>
           </div>
@@ -166,6 +155,29 @@
         </div>
       </div>
     </footer>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+      _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+      _gaq.push(['_setAccount', 'UA-44241540-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+      function trackOutboundLink(link, category, action) { 
+        try { 
+          _gaq.push(['_trackEvent', category , action]); 
+        } catch(err){}
+         
+        setTimeout(function() {
+          document.location.href = link.href;
+        }, 100);
+      }
+    </script>
   </body>
 </html>
 
