@@ -10,6 +10,28 @@
 
     <!-- fonts -->
     <link href='http://fonts.googleapis.com/css?family=Philosopher|IM+Fell+DW+Pica' rel='stylesheet' type='text/css'>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="./jquery.lettering.js"></script>
+    <script type="text/javascript">
+      $(function() {
+          $(".letter-container > span").lettering();
+      });
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+      _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+      _gaq.push(['_setAccount', 'UA-44241540-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
   </head>
   <body>
     <div class="navbar-wrapper">
@@ -29,7 +51,9 @@
         <div class="container">
           <div class="letter-container">
             <span>Darkness is coming...</span>
-            <i class="icon-caret-down"></i>
+            <div>
+              <i class="icon-caret-down"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -86,7 +110,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 col-lg-12">
-            <a class="thumbnail" href="http://www.youtube.com/watch?v=Qxoh1jSxFFI">
+            <a class="thumbnail" target="_blank" href="http://www.youtube.com/watch?v=Qxoh1jSxFFI">
               <img src="http://img.youtube.com/vi/Qxoh1jSxFFI/mqdefault.jpg" alt="Watch the Trailer" />
             </a>
             <h3>Watch the Trailer</h3>
@@ -142,27 +166,6 @@
         </div>
       </div>
     </footer>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="./jquery.lettering.js"></script>
-    <script type="text/javascript">
-      $(function() {
-          $(".letter-container > span").lettering();
-      });
-    </script>
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
-      _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
-      _gaq.push(['_setAccount', 'UA-44241540-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
   </body>
 </html>
 

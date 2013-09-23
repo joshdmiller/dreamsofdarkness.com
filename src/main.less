@@ -95,7 +95,7 @@ body, html {
     padding-bottom: 30px;
     letter-spacing: 3px;
 
-    span, i {
+    > span > span, i {
       color: #fff;
       opacity: 1;
       text-shadow: 0px 0px 2px #fff, 1px 1px 4px rgba(0,0,0,0.7);
@@ -243,8 +243,8 @@ body, html {
     }
 
     i {
-      animation-delay: 2.2s;
-      -webkit-animation-delay: 2.2s;
+      animation-delay: 2.2s !important;
+      -webkit-animation-delay: 2.2s !important;
       animation-delay: 2.2s;
       animation-delay: 2.2s;
     }
@@ -436,7 +436,7 @@ body, html {
 /**
  * Tablets and Higher
  */
-@media (min-width: @screen-tablet-max) {
+@media (min-width: @screen-md-max) {
   .navbar {
     opacity: .9;
   }
