@@ -50,6 +50,7 @@ a {
   z-index: 1030;
   border-radius: 0;
   margin-bottom: 0;
+  border: none;
 
   .navbar-brand {
     max-width: 400px;
@@ -73,7 +74,7 @@ body, html {
 
 .jumbotron {
   display: table;
-  height: 100%;
+  height: 75%;
   min-width: 100%;
   padding-top: @navbar-height * 2;
   background: url(./background.png) no-repeat top center;
@@ -399,6 +400,15 @@ body, html {
   background-color: @navbar-inverse-bg;
   padding: 60px 0;
 
+  .phone-number {
+    .transition( 500ms linear );
+    opacity: 0;
+
+    &.show {
+      opacity: 1;
+    }
+  }
+
   .tickets li {
     margin: 10px 0;
   }
@@ -440,7 +450,7 @@ body, html {
 /**
  * Tablets and Higher
  */
-@media (min-width: @screen-md-max) {
+@media (min-width: @screen-md) {
   .navbar {
     opacity: .9;
   }

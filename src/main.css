@@ -2722,6 +2722,7 @@ a:hover {
   z-index: 1030;
   border-radius: 0;
   margin-bottom: 0;
+  border: none;
 }
 .navbar .navbar-brand {
   max-width: 400px;
@@ -2740,7 +2741,7 @@ html {
 }
 .jumbotron {
   display: table;
-  height: 100%;
+  height: 75%;
   min-width: 100%;
   padding-top: 100px;
   background: url(./background.png) no-repeat top center;
@@ -3061,6 +3062,14 @@ html {
 .footer {
   background-color: #222222;
   padding: 60px 0;
+}
+.footer .phone-number {
+  -webkit-transition: 500ms linear;
+  transition: 500ms linear;
+  opacity: 0;
+}
+.footer .phone-number.show {
+  opacity: 1;
 }
 .footer .tickets li {
   margin: 10px 0;
@@ -3598,7 +3607,7 @@ td.visible-print {
 /**
  * Tablets and Higher
  */
-@media (min-width: 1199px) {
+@media (min-width: 992px) {
   .navbar {
     opacity: .9;
   }

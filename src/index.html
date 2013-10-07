@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="dodApp">
   <head>
     <title>Dreams of Darkness Haunted House</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +12,13 @@
     <link href='http://fonts.googleapis.com/css?family=Philosopher|IM+Fell+DW+Pica' rel='stylesheet' type='text/css'>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="./jquery.lettering.js"></script>
-    <script type="text/javascript">
-      $(function() {
-          $(".letter-container > span").lettering();
-      });
+    <script src="jquery.lettering.js"></script>
+    <script type="text/javascript" charset="utf-8">
     </script>
+    <script src="http://www.google-analytics.com/ga.js" type="text/javascript" charset="utf-8"></script>
+    <script src="angular.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="angular-touch.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="dod.js" type="text/javascript" charset="utf-8"></script>
   </head>
   <body>
     <div class="navbar-wrapper">
@@ -36,60 +37,70 @@
       <div class="marketing-text">
         <div class="container">
           <div class="letter-container">
-            <span>Darkness is coming...</span>
-            <div>
-              <i class="icon-caret-down"></i>
-            </div>
+            <span lettering>Darkness is coming...</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="order-form-wrapper" id="order-form">
+    <div class="order-form-wrapper" id="order-form" ng-controller="OrderCtrl">
       <div class="container">
-        <div class="order-form">
-          <!--<legend class="hidden-lg">Buy Tickets</legend>
+        <center ng-show="purchased" style="color: #000; font-size: 20px; line-height: 30px;">Thank you for your purchase! You will receive your tickets by email.<br />If you do not receive your tickets within an hour, please get in touch.</center>
+        <form class="order-form" ng-hide="purchased"
+          method="POST" action="https://{{env}}.paypal.com/cgi-bin/webscr" target="_top">
+          <input type="hidden" name="button" value="buynow" />
+          <input type="hidden" name="business" value="FDPLGAHEC8LWY" />
+          <input type="hidden" name="item_name" value="{{ticket_type || 'Night'}}" />
+          <input type="hidden" name="quantity" value="{{qty || 1}}" />
+          <input type="hidden" name="amount" value="{{amount || 15}}" />
+          <input type="hidden" name="currency_code" value="USD" />
+          <input type="hidden" name="notify_url" value="http://ipn.dapperpr.com/dod" />
+          <input type="hidden" name="bn" value="JavaScriptButton_buynow" />
+          <input type="hidden" name="cmd" value="_xclick" />
+          <input type="hidden" name="env" value="{{env}}" />
+          <input type="hidden" name="custom" value="{{uuid}}" />
+          <legend class="hidden-md hidden-lg">Buy Tickets</legend>
           <div class="row">
-              <label class="control-label col-lg-2 visible-lg" for="qty">Order Tickets:</label>
-              <div class="col-lg-2 col-12">
-                <select id="qty" class="form-control">
-                  <option>How Many?</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                </select>
-              </div>
-              <div class="col-lg-3 col-12">
-                <select id="time" class="form-control">
-                  <option>What Time of Day?</option>
-                  <option>Night - $15 each</option>
-                  <option>Afternoon - $6 each</option>
-                </select>
-              </div>
-              <div class="col-lg-3 col-12">
-                <select id="time" class="form-control">
-                  <option>How did you hear about us?</option>
-                  <option>Facebook</option>
-                  <option>Twitter</option>
-                  <option>Internet - Other</option>
-                  <option>From a friend</option>
-                  <option>Television</option>
-                  <option>Radio</option>
-                  <option>Other</option>
-                </select>
-              </div>
-              <div class="col-lg-2 col-12">
-                <button class="btn btn-danger btn-block btn-small">Buy</button>
-              </div>-->
-              <h4><center>Tickets Go On Sale September 25th</center></h4>
+            <label class="control-label col-md-2 visible-lg visible-md" for="qty">Order Tickets:</label>
+            <div class="col-md-2 col-12">
+              <select id="qty" class="form-control" ng-model="qty">
+                <option value="0">How Many?</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-12">
+              <select id="time" class="form-control" ng-model="ticket_type">
+                <option value="0">What Time of Day?</option>
+                <option value="Night">Night - $15 each</option>
+                <option value="Day">Afternoon - $6 each</option>
+              </select>
+            </div>
+            <div class="col-md-3 col-12">
+              <select class="form-control how-hear" ng-model="how_hear">
+                <option value="0">How did you hear about us?</option>
+                <option value="internet">The Interwebs</option>
+                <option value="tv">TV Commercial</option>
+                <option value="radio">Radio Ad</option>
+                <option value="friend">From a Friend</option>
+                <option value="existing">I've Been There Before</option>
+              </select>
+            </div>
+            <div class="col-md-2 col-12">
+              <button type="submit" class="btn btn-danger btn-block btn-small form-submit">
+                Get Tickets
+                <span ng-show="total">: <b>{{total | currency}}</b></span>
+              </button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
     <div class="media">
@@ -109,7 +120,7 @@
     <footer class="footer">
       <div class="container">
         <div class="marketing-copy">
-          We are Redding's only commercial haunted attraction
+          We are Redding's only commercial haunted house
           and the largest in the north state.
         </div>
         <div class="row">
@@ -120,20 +131,22 @@
               10925 Old Oregon Trail<br />
               Redding, CA 96003<br /><br />
               <a href="https://maps.google.com/maps/?q=10925+Old+Oregon+Trail%2C+Redding%2C+CA+96003"
-                class="btn btn-danger"
+                class="btn btn-danger btn-block btn-lg"
                 target="_new"
-                onClick="trackOutboundLink(this, 'Outbound Link', 'directions'); return false;">Directions</a>
+                onClick="trackOutboundLink(this, 'Outbound Link', 'directions'); return false;">Get Directions</a>
             </address>
           </div>
-          <div class="col-12 col-sm-4 col-lg-4">
+          <div class="col-12 col-sm-4 col-lg-4" ng-init="showPhone = false">
             <h3><i class="icon-comment"></i>&nbsp;&nbsp;Get in Touch</h3>
             <div class="social">
               <ul class="list-inline">
                 <li><a href="mailto:info@dreamsofdarkness.com" onClick="trackOutboundLink(this, 'Social Link', 'email'); return false;"><i class="icon-envelope"></i></a></li>
+                <li><a class="phone-click" href="" ng-click="showPhone = !showPhone"><i class="icon-phone"></i></a></li>
                 <li><a href="http://www.facebook.com/thedreamsofdarkness" onClick="trackOutboundLink(this, 'Social Link', 'facebook'); return false;"><i class="icon-facebook"></i></a></li>
                 <li><a href="http://twitter.com/reddinghaunt" onClick="trackOutboundLink(this, 'Social Link', 'twitter'); return false;"><i class="icon-twitter"></i></a></li>
               </ul>
             </div>
+            <h3 class="phone-number" ng-class="{ show: showPhone }">530.710.2277</h3>
           </div>
           <div class="col-12 col-sm-4 col-lg-4">
             <h3><i class="icon-ticket"></i>&nbsp;&nbsp;Tickets</h3>
@@ -142,41 +155,39 @@
               <li>
                 <b>Nights - $15</b><br />
                 Fri and Sat 7pm-11pm<br />
-                Oct 29<sup>th</sup> - Oct 31<sup>st</sup> 7pm-10pm
+                Oct 29<sup>th</sup> - Oct 31<sup>st</sup> 7pm-9:30pm
               </li>
               <li>
                 <b>Afternoons - $6</b><br />
                 Sat and Sun 12pm-4pm
               </li>
             </dl>
-            <p><b>Tickets go on sale September 25th</b></p>
-            <!-- <a href="#order-form" class="btn btn-danger">Buy Tickets</a>-->
+            <a href="#order-form" class="btn btn-danger btn-lg hidden-md hidden-lg">Get Tickets</a>
           </div>
         </div>
       </div>
     </footer>
+
+
+    <script type="text/javascript" charset="utf-8">
+      $(function () {
+        $(".phone-click").on('click', function (e) {
+          e.preventDefault();
+          trackOutboundLink(this, 'Social Link', 'phone', true);
+        });
+
+        $(".form-submit").on('click', function ( e ) {
+          var _this = this;
+          _gaq.push(['_set','hitCallback',function() {
+            $(_this).parents('form').first().submit(); 
+            console.log("submit");
+          }]);
+          _gaq.push(['_trackEvent', 'Purchase Intent', $(".how-hear").val() ]);
+          return !window._gat; 
+        });
+      });
+    </script>
     <script type="text/javascript">
-      var _gaq = _gaq || [];
-      var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
-      _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
-      _gaq.push(['_setAccount', 'UA-44241540-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-      function trackOutboundLink(link, category, action) { 
-        try { 
-          _gaq.push(['_trackEvent', category , action]); 
-        } catch(err){}
-         
-        setTimeout(function() {
-          document.location.href = link.href;
-        }, 100);
-      }
     </script>
   </body>
 </html>
